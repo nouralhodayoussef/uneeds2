@@ -11,9 +11,9 @@ $errors = [
     'phonenumber' => '',
     'address' => '',
 ];
+$userExistsError = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Sanitize user input
     $fname = htmlspecialchars(trim($_POST['fname']));
     $lname = htmlspecialchars(trim($_POST['lname']));
     $email = htmlspecialchars(trim($_POST['email']));
@@ -22,50 +22,45 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $phonenumber = htmlspecialchars(trim($_POST['phonenumber']));
     $address = htmlspecialchars(trim($_POST['address']));
 
-    // Validate inputs (one at a time)
     if (empty($fname)) {
         $errors['fname'] = "First name is required.";
-    }
-    else if (empty($lname)) {
+    } elseif (empty($lname)) {
         $errors['lname'] = "Last name is required.";
-    }
-    else if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+    } elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
         $errors['email'] = "Invalid email format.";
-    }
-   else if (strlen($password) < 8 || strlen($password) > 18 ) {
+    } elseif (strlen($password) < 8 || strlen($password) > 18) {
         $errors['password'] = "Password must be 8-18 characters long";
-    }
-    else if(!preg_match('/[A-Z]/', $password) || !preg_match('/[@#$%_]/', $password)){
+    } elseif (!preg_match('/[A-Z]/', $password) || !preg_match('/[@#$%_]/', $password)) {
         $errors['password'] = "Include at least 1 uppercase letter and 1 special character";
-    }
-    else if ($password !== $cPassword) {
+    } elseif ($password !== $cPassword) {
         $errors['cPassword'] = "Passwords do not match.";
-    }
-    else if (empty($phonenumber) || !preg_match('/^\d+$/', $phonenumber)) {
+    } elseif (empty($phonenumber) || !preg_match('/^\d+$/', $phonenumber)) {
         $errors['phonenumber'] = "Phone number must contain only digits.";
-    }
-    else if (empty($address)) {
+    } elseif (empty($address)) {
         $errors['address'] = "Address is required.";
     }
 
-    // If there are no errors, proceed with registration
     if (!array_filter($errors)) {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+        $checkUser = "SELECT * FROM users WHERE email = '$email' OR (first_name = '$fname' AND last_name = '$lname')";
+        $result = mysqli_query($con, $checkUser);
 
-        // Insert data into the users table
-        $sql = "INSERT INTO users (first_name, last_name, email, password, phone, address, isAdmin) 
-                VALUES ('$fname', '$lname', '$email', '$hashedPassword', '$phonenumber', '$address', 0)";
-
-        if (mysqli_query($con, $sql)) {
-            header("Location: login.php");
-            exit();
+        if (mysqli_num_rows($result) > 0) {
+            $userExistsError = "User already exists.";
         } else {
-            $errors['email'] = "Error: " . mysqli_error($con);
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+            $sql = "INSERT INTO users (first_name, last_name, email, password, phone, address, isAdmin) 
+                    VALUES ('$fname', '$lname', '$email', '$hashedPassword', '$phonenumber', '$address', 0)";
+
+            if (mysqli_query($con, $sql)) {
+                header("Location: login.php");
+                exit();
+            } else {
+                $errors['email'] = "Error: " . mysqli_error($con);
+            }
         }
     }
 }
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,17 +72,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Sign Up</title>
     <style>
+        .userError{
+           color: red;
+           text-align: center;
+          
+        }
         .error {
             color: red;
             font-size: 14px;
             margin: 3px 5px;
             padding: 0;
-
-            visibility: hidden; /* By default, errors are invisible */
+            visibility: hidden;
         }
 
         .error.visible {
-            visibility: visible; /* Only visible when error exists */
+            visibility: visible;
         }
     </style>
 </head>
@@ -103,16 +102,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div>
                         <h2>Register Now</h2>
+                        <p class="userError <?php echo !empty($userExistsError) ? 'visible' : ''; ?>"><?php echo $userExistsError; ?></p>
                     </div>
                 </div>
 
                 <div class="firstinput">
                     <div>
-                        <input type="text" class="name-box" name="fname" placeholder="First Name" value="<?php echo htmlspecialchars($_POST['fname'] ?? ''); ?>" >
+                        <input type="text" class="name-box" name="fname" placeholder="First Name" value="<?php echo htmlspecialchars($_POST['fname'] ?? ''); ?>">
                         <p class="error <?php echo !empty($errors['fname']) ? 'visible' : ''; ?>"><?php echo $errors['fname']; ?></p>
                     </div>
                     <div>
-                        <input type="text" class="name-box" name="lname" placeholder="Last Name" value="<?php echo htmlspecialchars($_POST['lname'] ?? ''); ?>" >
+                        <input type="text" class="name-box" name="lname" placeholder="Last Name" value="<?php echo htmlspecialchars($_POST['lname'] ?? ''); ?>">
                         <p class="error <?php echo !empty($errors['lname']) ? 'visible' : ''; ?>"><?php echo $errors['lname']; ?></p>
                     </div>
                 </div>
