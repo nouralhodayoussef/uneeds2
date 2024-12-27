@@ -1,0 +1,194 @@
+.about-us {
+
+    background-color: var(--span-color);
+    padding: 50px 20px;
+    text-align: center;
+  }
+  
+  .about-content {
+    max-width: 800px;
+    margin: 0 auto;
+   
+  }
+  
+  .about-us h2 {
+    font-size: 2rem;
+    color: var(--text-color);
+    margin-bottom: 15px;
+  }
+  
+  .about-us p {
+    text-align: justify;
+    font-size: 1rem;
+    color: var(--text-color);
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+  
+  .about-section {
+    background-color: white;
+    padding: 40px 20px;
+    border-radius: 10px;
+    max-width: 800px;
+    margin: 20px auto;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .about-content h2 {
+    font-size: 2rem;
+    color: var(--main-color);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .about-content p {
+    font-size: 1rem;
+    color: #333333;
+    line-height: 1.6;
+    text-align: center;
+    margin-bottom: 30px;
+    text-align: justify;
+  }
+  
+  .feedback-form {
+    text-align: center;
+    margin-top: 20px;
+  }
+  
+  .feedback-form h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: var(--main-color);
+  }
+  
+  .feedback-input {
+    width: 70%;
+    max-width: 500px;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1rem;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    outline: none;
+  }
+  
+  .feedback-input:focus {
+    border-color: var(--accent-color);
+    box-shadow: 0 0 5px rgba(253, 216, 53, 0.5);
+  }
+  
+  .submit-btn {
+    background-color:  #fbc02d;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .submit-btn:hover {
+    background-color:#fdce57 ;
+  }
+
+
+   /*MEDIA QUERY FOR ABOUT US  */
+   @media (max-width: 768px) {
+    .about-us {
+      padding: 30px 15px;
+    }
+  
+    .about-us h2 {
+      font-size: 1.6rem;
+    }
+  
+    .about-us p {
+      font-size: 0.95rem;
+    }
+  
+    .read-more {
+      padding: 8px 16px;
+    }
+    .feedback-input {
+      width: 90%;
+      font-size: 0.9rem;
+      padding: 8px;
+    }
+  
+    .submit-btn {
+      
+      padding: 8px 16px;
+      font-size: 0.9rem;
+    }
+  
+    .feedback-form h3 {
+      font-size: 1.3rem;
+    }
+  }
+  @media (max-width: 1024px) {
+    .about-us {
+      padding: 40px 15px;
+    }
+  
+    .about-us h2 {
+      font-size: 1.8rem;
+    }
+  
+    .about-us p {
+      font-size: 0.95rem;
+    }
+  
+    .read-more {
+      padding: 8px 16px;
+    }
+  }
+  
+  
+  
+  @media (max-width: 480px) {
+    .about-us {
+      padding: 25px 10px;
+    }
+  
+    .about-us h2 {
+      font-size: 1.4rem;
+    }
+  
+    .about-us p {
+      font-size: 0.85rem;
+    }
+  
+    .read-more {
+      padding: 7px 14px;
+      font-size: 0.9rem;
+    }
+    .feedback-input {
+      width: 100%;
+      font-size: 0.85rem;
+    }
+  
+    .submit-btn {
+      width: 100%;
+      padding: 10px;
+      font-size: 0.85rem;
+    }
+  
+    .feedback-form h3 {
+      font-size: 1.2rem;
+    }.feedback-input {
+      width: 100%;
+      font-size: 0.85rem;
+    }
+  
+    .submit-btn {
+      width: 100%;
+      padding: 10px;
+      font-size: 0.85rem;
+    }
+  
+    .feedback-form h3 {
+      font-size: 1.2rem;
+    }
+  }

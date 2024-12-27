@@ -1,0 +1,186 @@
+:root {
+    --main-color: #ffffff;
+    --text-color: #000000;
+    --bg-color: #edecec;
+    --span-color: rgb(254, 216, 132);
+    --font-family: "Lato", sans-serif;
+  }
+  
+  body {
+    margin: 0;
+    height: 200vh;
+    width: 100%;
+  }
+  
+  .container {
+   
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 85vh;
+    width: 76%;
+    margin-left: 12%;
+    border-radius: 20px;
+    margin-bottom: 30px;
+    position: relative;
+     background-image: url(../../imgs/containerbg.png);
+  }
+  
+  .statement h4 {
+    font-family: var(--font-family);
+    font-weight: 600;
+    
+    padding-left: 40px;
+    width: 90%;
+    margin-top: 50px;
+    font-size: 2.5rem;
+  }
+  
+  span {
+    background-color: var(--span-color);
+    border-style: outset;
+
+  }
+  
+  .container p {
+    margin-left: 45px;
+    margin-bottom: 40px;
+    font-family: var(--font-family);
+   
+  }
+  
+  a.button {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    margin-left: 45px;
+  }
+  
+  .button:hover {
+    background-color: gray;
+    color: var(--span-color);
+  }
+  
+  .container img {
+    width: 700px;
+    height: 400px;
+    margin-top: 40px;
+    margin-left: 15%;
+
+  }
+  .containercontent{
+    display: flex;
+  }
+
+
+   /* @MEDIA QUERY FOR CONTAINER */
+   @media (min-width: 1350px) {
+    .statement{
+      font-size: 22px;
+    }
+  }
+  @media (max-width: 1150px) {
+    .statement {
+      width: 40%;
+     
+    }
+    
+     
+    
+  }
+  
+  @media (max-width: 1030px) {
+    .statement {
+      width: 40%;
+      
+    }
+
+    .container img {
+      display: none;
+    }
+
+    
+    
+    
+  }
+  @media (max-width: 909px){
+    .statement {
+      width: 40%;
+      box-sizing: border-box;
+    }
+    
+  
+  }
+  @media(max-width: 685px){
+  .statement{
+    width: 50%;
+    
+  }
+  .container p {
+    margin-left: 20px;
+    margin-bottom: 20px; 
+    font-size: 14px; 
+    padding-right: 10px;
+  }
+  }
+  @media(max-width: 530px){
+    .statement{
+  width: 60%;
+    }
+    .container p {
+      margin-left: 20px;
+      margin-bottom: 20px; 
+      font-size: 14px; 
+      padding-right: 10px;
+    }
+  }
+  @media(max-width: 450px){
+    .statement{
+  width: 70%;
+    }
+    .container p {
+      margin-left: 20px;
+      margin-bottom: 20px; 
+      font-size: 14px; 
+      padding-right: 10px;
+    }
+  } 
+  
+  @media (max-width: 300px) {
+    .container {
+      text-align: center;
+      width: 90%; 
+      margin-left: 5%; 
+      height: auto; 
+      padding-bottom: 20px;
+    }
+    
+    .statement h4 {
+      margin-left: 36px;
+      font-size: 1.5rem; 
+      padding-left: 20px; 
+      margin-top: 20px;
+      width: 90%; 
+    }
+  
+    .container p {
+      margin-left: 20px;
+      margin-bottom: 20px; 
+      font-size: 14px; 
+      padding-right: 10px;
+    }
+  
+    a.button {
+      margin-left: 20px; 
+      padding: 5px 5px; 
+      font-size: 10px; 
+      
+    }
+  
+  
+  }

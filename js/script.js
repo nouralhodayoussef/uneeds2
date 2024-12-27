@@ -1,19 +1,43 @@
-const toggle = document.querySelector('.toggle');
-const menu = document.querySelector('.menu');
+document.addEventListener("DOMContentLoaded", () => {
+    const menuIcon = document.getElementById("menu-icon");
+    const navbar = document.getElementById("navbar");
+    menuIcon.addEventListener("click", () => {
+      navbar.classList.toggle("active");
+    });
+  
+  });
 
-function toggleMenu() {
-    if (menu.classList.contains('active')) {
-        menu.classList.remove('active');
 
-        toggle.querySelector('a').innerHTML = '<i class="fa-solid fa-bars"></i>';
-        toggle.classList.add('transformed')
-    } 
-    else {
-        menu.classList.add('active');
+//   Slider js
+const sliderTrack = document.querySelector('#containerProduct');
+const prevBtn = document.querySelector('.prev');
+const nextBtn = document.querySelector('.next');
 
-        toggle.querySelector('a').innerHTML = '<i class="fa-solid fa-xmark"></i>';
-        toggle.classList.add('transformed')
+
+let currentPosition = 0;
+
+const slide = (direction) => {
+  const sliderWidth = sliderTrack.offsetWidth; 
+  const totalWidth = sliderTrack.scrollWidth;
+
+  const moveDistance = sliderWidth; 
+
+  if (direction === 'next') {
+   
+    if (currentPosition + moveDistance < totalWidth) {
+      currentPosition += moveDistance;
     }
-}
-toggle.addEventListener('click', toggleMenu, false);
+  } else if (direction === 'prev') {
+    
+    if (currentPosition - moveDistance >= 0) {
+      currentPosition -= moveDistance;
+    }
+  }
 
+ 
+  sliderTrack.style.transform = `translateX(-${currentPosition}px)`;
+};
+
+
+prevBtn.addEventListener('click', () => slide('prev'));
+nextBtn.addEventListener('click', () => slide('next'));

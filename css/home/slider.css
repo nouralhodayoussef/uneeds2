@@ -1,0 +1,138 @@
+.sliderdiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  
+    width: 100%;
+  }
+  
+  .slider {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    overflow: hidden;
+    height: 50vh;
+    margin-top: 20px;
+  }
+  
+  .slider-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  #containerProduct {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10%;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 3%;
+    width: 60%;
+  }
+  
+  #box {
+    display: flex;
+    justify-content: center;
+    flex: 0 0 40%;
+    background-color: var(--main-color);
+    border-radius: 10px;
+    box-shadow: 1px 2px 6px 2px rgb(219, 219, 219);
+    transition: box-shadow 0.3s;
+    
+    height: 40vh;
+  }
+  
+  #box:hover {
+    box-shadow: 1px 6px 3px 0 rgb(185, 185, 185);
+    cursor: pointer;
+  }
+  
+  a {
+    text-decoration: none;
+    color: var(--text-color);
+  }
+  
+  #box img {
+    width: 100%;
+    height: 60%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  #details {
+    padding-top: 10px;
+    padding-left: 5px;
+    text-transform: capitalize;
+  }
+  
+  #details h3 {
+    font-size: 14px;
+  }
+  
+  #details h4 {
+    font-weight: 100;
+  }
+  
+  .slider-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: var(--span-color);
+    border: none;
+    color: var(--text-color);
+    font-size: 24px;
+    cursor: pointer;
+    z-index: 10;
+    padding: 10px;
+    border-radius: 50%;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  }
+  
+  .slider-btn.prev {
+    left: 10px;
+  }
+  
+  .slider-btn.next {
+    right: 10px;
+  }
+  
+  .slider-btn:hover {
+    background-color: rgb(245, 203, 111);
+  }
+
+
+
+  
+  /* MEDIA QUERY FOR SLIDER */
+  @media (max-width: 1200px) {
+    #containerProduct {
+      height: 40vh;
+      
+    }
+    #box {
+      flex: 0 0 33%; 
+      padding-bottom: 15px;
+    }
+   
+  }
+  
+  @media (max-width: 800px) {
+    #box {
+      flex: 0 0 50%; 
+    }
+    
+  }
+  
+  @media (max-width: 600px) {
+    #box {
+      flex: 0 0 50%;
+    }
+  }
+  
+  @media (max-width: 400px) {
+    #box {
+      flex: 0 0 100%; 
+    }
+  }
+
+ 

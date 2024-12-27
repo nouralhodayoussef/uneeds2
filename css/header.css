@@ -1,0 +1,189 @@
+:root {
+    --main-color: #ffffff;
+    --text-color: #000000;
+    --bg-color: #edecec;
+    --span-color: rgb(254, 216, 132);
+    --font-family: "Lato", sans-serif;
+    --font-size: 1rem;
+  }
+  body {
+    margin: 0;
+    height: 100vh;
+    width: 100%;
+  }
+  header {
+    display: flex;
+    margin: auto;
+    text-align: center;
+    width: 100%;
+    height: 20vh;
+    background-color: var(--main-color);
+  
+    font-family: "Lato", sans-serif;
+    z-index: 1;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 60px;
+    box-sizing: border-box;
+  }
+  header::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+  #check {
+    display: none;
+  }
+  img {
+    width: 60px;
+    height: 60px;
+  }
+  
+  .header a {
+    font-family: var(--font-family);
+    text-decoration: none;
+    color: var(--text-color);
+    display: flex;
+    pointer-events: all;
+    position: relative;
+    z-index: 10;
+  }
+  .navbar {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    position: absolute;
+    left: 32%;
+  }
+  .navbar {
+    display: flex;
+    gap: 20px;
+  }
+  .navbar li {
+    list-style: none;
+    gap: 10px;
+  }
+  .navbar li a {
+    text-decoration: none;
+    font-size: var(--font-size);
+    font-weight: bold;
+  }
+  .righthead {
+    display: flex;
+    gap: 2rem;
+    pointer-events: auto;
+  }
+  .menu-icon {
+    color: var(--main-color);
+    font-size: 2rem;
+    cursor: pointer;
+    display: none;
+  }
+  .shop-cart {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  a.btn {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  .navbar.active {
+    display: block;
+  }
+  @media (max-width: 992px) {
+    .navbar ul {
+      margin-left: -50px;
+    }
+   
+  }
+  
+  @media (max-width: 841px) {
+    .menu-icon {
+      display: initial;
+      color: var(--text-color);
+      position: absolute;
+      display: block;
+      right: 0;
+      padding-right: 10px;
+    }
+    
+  
+    .navbar {
+      position: absolute;
+      top: 15%;
+      left: 0;
+      right: 0;
+      background: var(--main-color);
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      height: 0;
+      overflow: hidden;
+      transition: 0.3s ease;
+      padding-left: 0px;
+      z-index: 11;
+    }
+   
+   
+    .navbar li {
+      padding: 10px;
+    }
+  
+    .navbar.active {
+      height: 130px;
+    }
+  
+    a.btn {
+      display: none;
+    }
+    .shop-cart {
+      margin-right: 35px;
+     
+    }
+  
+    .navbar a {
+      display: block;
+    }
+    
+    header {
+      padding-left: 10px;
+    }
+  }
+  
+  @media (max-width: 400px){
+    img{
+      width: 40px;
+      height: 40px;
+    }
+    h2{
+      font-size: 1rem;
+    }
+    .menu-icon{
+      font-size: 1.2rem;
+    }
+    .shop-cart{
+      font-size: 1.2rem;
+    }
+    header{
+      padding-left: 15px;
+      padding-right: 50px;
+    }
+    
+  }
+  
+  @media(max-width: 272px){
+    .shop-cart{
+      margin-left: 40%;
+    }
+  }
+  
