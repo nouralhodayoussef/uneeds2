@@ -1,0 +1,150 @@
+
+h1
+{
+    width: 90%;
+    margin: auto;
+    padding-bottom: 50px;
+    letter-spacing: 2px;
+    font-weight: 700;
+    text-transform: capitalize;
+}
+#containerProduct
+{
+    display: grid;
+    grid-gap: 70px 20px;
+    grid-template-columns: repeat(5, 1fr);
+    width: 80%;
+    margin: auto;
+    padding-bottom: 40px;
+}
+#containerProduct a{
+    position: relative;
+  z-index: 10;
+}
+#box 
+{
+    width: 100%;
+    height: 90%;
+    max-height: fit-content;
+    background-color: white;
+    align-content: center;
+    border-radius: 10px;
+    box-shadow: 1px 2px 6px 2px rgb(219, 219, 219);
+}
+#box:hover
+{
+    box-shadow: 1px 6px 3px 0 rgb(185, 185, 185);
+    cursor: pointer;
+}
+#box img
+{
+    width: 100%;
+    height: max-content;
+    height: 60%;
+    box-sizing: border-box;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+
+#details
+{
+    padding: 0 15px;
+    text-transform: capitalize;
+    margin-bottom: 15px;
+    
+    
+}
+#box a 
+{
+    text-decoration: none;
+    color: rgb(29, 29, 29);
+}
+h3
+{
+    font-size: 16px;
+}
+h4
+{
+    font-weight: 100;
+}
+
+#details span
+{
+    color: rgb(196, 178, 14);
+    font-weight: bold;
+}
+
+/* ----------------------------- MEDIA QUERY --------------------------- */
+
+@media(max-width: 1070px)
+{
+    h1
+    {
+        font-size: 25px;
+    }
+    #containerProduct
+    {
+        width: 95%;
+        grid-gap: 10px;
+    }
+}
+@media(max-width: 850px)
+{
+    h1 
+    {
+        width: 90%;
+    }
+    #containerProduct
+    {
+        display: grid;
+        grid-gap: 0px 5px;
+        grid-template-columns: repeat(2, 1fr);
+        width: 80%;
+    }    
+}
+@media(max-width: 650px)
+{
+    h1
+    {
+        font-size: 20px;
+    }
+    h1 
+    {
+        width: 90%;
+    }
+    #containerProduct 
+    {
+        width: 90%;
+    }
+}
+@media(max-width: 600px)
+{
+    h1 
+    {
+        width: 70%;
+    }
+    #containerProduct 
+    {
+        width: 70%;
+    }
+}
+@media(max-width: 505px)
+{
+    h1 
+    {
+        width: 80%;
+    }
+    #containerProduct 
+    {
+        width: 80%;
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+@media(max-width: 425px){
+
+    #containerProduct{
+        display: grid;
+        grid-template-columns: 1fr;
+    }
+
+}
