@@ -12,7 +12,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
         $message = trim($_POST['feedback']);
 
         if (!empty($message)) {
-            $stmt = $conn->prepare("INSERT INTO feedbacks (user_id, message) VALUES (?, ?)");
+            $stmt = $con->prepare("INSERT INTO feedbacks (user_id, message) VALUES (?, ?)");
             if ($stmt) {
                 $stmt->bind_param("is", $user_id, $message);
 
@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
                 }
                 $stmt->close();
             } else {
-                echo json_encode(['status' => 'error', 'message' => 'Database error: ' . $conn->error]);
+                echo json_encode(['status' => 'error', 'message' => 'Database error: ' . $con->error]);
             }
         } else {
             echo json_encode(['status' => 'error', 'message' => 'Please provide feedback before submitting.']);

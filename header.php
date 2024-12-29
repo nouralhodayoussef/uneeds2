@@ -18,9 +18,9 @@
       </a>
 
       <ul class="navbar" id="navbar">
-        <li><a href="products.html">Products</a></li>
-        <li><a href="home.html#about-us">About Us</a></li>
-        <li><a href="home.html#about-us">Contact Us</a></li>
+        <li><a href="products.php">Products</a></li>
+        <li><a href="home.php#about-us">About Us</a></li>
+        <li><a href="home.php#about-us">Contact Us</a></li>
       </ul>
 
       <div class="righthead">
