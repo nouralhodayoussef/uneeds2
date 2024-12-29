@@ -109,6 +109,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
         });
     </script>
 
+    <!-- Container -->
+
     <div class="container">
         <div class="containercontent">
             <div>
@@ -126,18 +128,78 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
         </div>
     </div>
 
+
+    <!-- Slider -->
+    <div class="sliderdiv">
+        <div class="slider">
+            <button class="slider-btn prev"><i class="bx bx-left-arrow-alt"></i></button>
+            <div id="containerProduct" class="slider-track">
+                <div id="box">
+
+                    <a href="productDetails.html">
+                        <img src="imgs/products/plan1.jpeg" alt="Notebook A4" />
+                        <div id="details">
+                            <h3>Pink Mug</h3>
+                            <h4>Mugs</h4>
+
+                        </div>
+                    </a>
+                </div>
+                <div id="box">
+                    <a href="productDetails.html">
+                        <img src="imgs/products/plan1.jpeg" alt="Gel Pen - Blue" />
+                        <div id="details">
+                            <h3>Daily Planner</h3>
+                            <h4>Planners</h4>
+
+                        </div>
+                    </a>
+                </div>
+                <div id="box">
+                    <a href="productDetails.html">
+                        <img src="imgs/products/plan1.jpeg" alt="Leather Bound Journal" />
+                        <div id="details">
+                            <h3>Leather Journal</h3>
+                            <h4>Stationery</h4>
+
+                        </div>
+                    </a>
+                </div>
+                <div id="box">
+                    <a href="productDetails.html">
+                        <img src="imgs/products/plan1.jpeg" alt="" />
+                        <div id="details">
+                            <h3>Stitch Tumbler</h3>
+                            <h4>Tumblers</h4>
+
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+            <button class="slider-btn next"><i class="bx bx-right-arrow-alt"></i></button>
+        </div>
+    </div>
+
+
+
+
+    <!-- About us -->
+
     <div class="yellowDiv"></div>
 
     <section id="about-us">
         <div class="about-us">
             <div class="about-content">
                 <h2>About Us</h2>
-                <p>At <strong>Uneeds</strong>, we provide high-quality products at affordable prices, ensuring a seamless
+                <p>At <strong>Uneeds</strong>, we provide high-quality products at affordable prices, ensuring a
+                    seamless
                     shopping experience. From home essentials to lifestyle accessories, we’re here to meet all your
                     needs with fast shipping and excellent customer service.</p>
                 <form class="feedback-form">
                     <h3>Send us your feedback</h3>
-                    <input type="text" name="feedback" placeholder="Your feedback here..." class="feedback-input" required />
+                    <input type="text" name="feedback" placeholder="Your feedback here..." class="feedback-input"
+                        required />
                     <button type="submit" class="submit-btn">Submit</button>
                 </form>
             </div>
@@ -152,6 +214,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
             .then(data => document.getElementById('footer').innerHTML = data)
             .catch(error => console.error('Error loading footer: ', error));
     </script>
+
+    <script src="js/script.js"></script>
 </body>
 
 </html>
