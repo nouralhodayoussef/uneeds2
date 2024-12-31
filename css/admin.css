@@ -1,0 +1,172 @@
+/* General Styles */
+body {
+    font-family: "Lato", sans-serif;
+    margin: 0;
+    display: flex;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 20%;
+    background-color: #333;
+    color: #fff;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.sidebar h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar ul li {
+    padding: 10px 20px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.sidebar ul li:hover,
+.sidebar ul li.active {
+    background-color: #444;
+}
+
+/* Content */
+.content {
+    width: 80%;
+    padding: 20px;
+}
+
+.section {
+    display: none;
+}
+
+.section.active {
+    display: block;
+}
+
+/* Table */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table,
+th,
+td {
+    border: 1px solid #ddd;
+}
+
+th,
+td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f4f4f4;
+}
+
+/* Forms */
+.form {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+}
+
+.form input,
+.form button {
+    margin-top: 10px;
+    padding: 10px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.form button {
+    background-color: black;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.form button:hover {
+    background-color: rgb(254, 216, 132);
+}
+
+.section button {
+    padding: 8px;
+    border-radius: 8px;
+    background-color: black;
+    color: white;
+}
+
+.section button:hover {
+    background-color: rgb(254, 216, 132);
+    color: #333;
+}
+
+.sidebar span {
+    color: rgb(254, 216, 132);
+}
+
+input {
+    margin-bottom: 8px;
+}
+
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px) {
+    body {
+        flex-direction: column;
+        /* Stack sidebar and content */
+        width: 100%;
+    }
+
+    .sidebar {
+        width: 100%;
+        min-height: auto;
+    }
+
+    .content {
+        width: 100%;
+    }
+
+    table,
+    th,
+    td {
+        font-size: 14px;
+    }
+
+    .form input,
+    .form button {
+        font-size: 14px;
+        padding: 8px;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .sidebar ul li {
+        padding: 8px;
+        font-size: 14px;
+    }
+
+    table,
+    th,
+    td {
+        font-size: 12px;
+    }
+
+    .form input,
+    .form button {
+        font-size: 12px;
+        padding: 6px;
+    }
+}
