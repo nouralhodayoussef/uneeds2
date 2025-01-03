@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
 
-//   Slider js
 const sliderTrack = document.querySelector('#containerProduct');
 const prevBtn = document.querySelector('.prev');
 const nextBtn = document.querySelector('.next');

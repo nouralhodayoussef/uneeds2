@@ -3,10 +3,8 @@ session_start();
 include 'config.php';
 
 
-// Handle AJAX feedback submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
-    header('Content-Type: application/json'); // Return JSON response
-
+    header('Content-Type: application/json'); 
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
         $message = trim($_POST['feedback']);
@@ -31,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
     } else {
         echo json_encode(['status' => 'error', 'message' => 'You must be logged in to submit feedback.']);
     }
-    exit(); // Ensure no further processing occurs
+    exit(); 
 }
 ?>
 
@@ -52,13 +50,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
             const feedbackForm = document.querySelector(".feedback-form");
 
             feedbackForm.addEventListener("submit", function (e) {
-                e.preventDefault(); // Prevent page reload
+                e.preventDefault(); 
 
                 const feedbackInput = document.querySelector(".feedback-input");
                 const feedback = feedbackInput.value.trim();
 
                 if (feedback) {
-                    // Send feedback using AJAX
                     fetch("home.php", {
                         method: "POST",
                         headers: {
@@ -69,12 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
                         .then((response) => response.json())
                         .then((data) => {
                             if (data.status === "success") {
-                                console.log(data.message); // Show success in console
-                                alert(data.message); // Optional: Show success as alert
-                                feedbackInput.value = ""; // Clear input
+                                console.log(data.message); 
+                                alert(data.message); 
+                                feedbackInput.value = ""; 
                             } else {
-                                console.error(data.message); // Show error in console
-                                alert(data.message); // Optional: Show error as alert
+                                console.error(data.message); 
+                                alert(data.message); 
                             }
                         })
                         .catch((error) => console.error("Error:", error));
