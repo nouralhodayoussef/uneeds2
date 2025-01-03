@@ -1,14 +1,16 @@
 <?php
-// Include database connection
-require_once 'config.php'; // Assuming the connection is in this file and uses $con
+require_once 'config.php';
 
-// Fetch all products and their categories
-$query = "SELECT p.id, p.name, p.description, p.price, p.stock, c.name as category_name, i.image_url 
+$query = "SELECT p.id, p.name, p.description, p.price, p.stock, c.name as category_name, 
+          (SELECT image_url FROM imgs WHERE product_id = p.id LIMIT 1) AS image_url
           FROM products p
-          LEFT JOIN categories c ON p.category_id = c.id
-          LEFT JOIN imgs i ON p.id = i.product_id
-          GROUP BY p.id";
+          LEFT JOIN categories c ON p.category_id = c.id";
 $result = mysqli_query($con, $query);
+
+$products_by_category = [];
+while ($product = mysqli_fetch_assoc($result)) {
+    $products_by_category[$product['category_name']][] = $product;
+}
 ?>
 
 <!DOCTYPE html>
@@ -22,8 +24,7 @@ $result = mysqli_query($con, $query);
     <link rel="stylesheet" href="css/products.css">
 </head>
 <body>
-    <!-- Header -->
-    <div id="header"></div>
+    <div id="header">Loading...</div>
     <script src="script.js"></script>
     <script>
         document.addEventListener("DOMContentLoaded", () => {
@@ -39,45 +40,116 @@ $result = mysqli_query($con, $query);
                         });
                     }
                 })
-                .catch(error => console.error('Error loading header: ', error));
+                .catch(error => console.error('Error loading header:', error));
         });
     </script>
 
     <div id="mainContainer">
         <h1>All The Products U-need!</h1>
 
-        <!-- Container for Products -->
-        <div id="containerProduct">
-            <?php
-            if ($result && mysqli_num_rows($result) > 0) {
-                while ($row = mysqli_fetch_assoc($result)) {
-                    ?>
-                    <div id="box">
-                        <a href="productDetails.php?id=<?php echo $row['id']; ?>">
-                            <img src="<?php echo htmlspecialchars($row['image_url']); ?>" alt="<?php echo htmlspecialchars($row['name']); ?>">
+        <!-- Laptop Bags Section -->
+        <div class="section1">
+            <h3>Laptop Bags</h3>
+            <div id="containerProduct">
+                <?php foreach ($products_by_category['laptop bags'] ?? [] as $product): ?>
+                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
+                        <div id="box">
+                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
                             <div id="details">
-                                <h3><?php echo htmlspecialchars($row['name']); ?></h3>
-                                <h4><?php echo htmlspecialchars($row['category_name']); ?></h4>
-                                <span>$ <?php echo number_format($row['price'], 2); ?></span>
+                                <h3><?php echo $product['name']; ?></h3>
+                                <h4><?php echo $product['category_name']; ?></h4>
+                                <span>$<?php echo number_format($product['price'], 2); ?></span>
                             </div>
-                        </a>
-                    </div>
-                    <?php
-                }
-            } else {
-                echo "<p>No products available.</p>";
-            }
-            ?>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
         </div>
+
+        <!-- Mugs Section -->
+        <div class="section1">
+            <h3>Mugs</h3>
+            <div id="containerProduct">
+                <?php foreach ($products_by_category['mugs'] ?? [] as $product): ?>
+                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
+                        <div id="box">
+                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
+                            <div id="details">
+                                <h3><?php echo $product['name']; ?></h3>
+                                <h4><?php echo $product['category_name']; ?></h4>
+                                <span>$<?php echo number_format($product['price'], 2); ?></span>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <!-- Planners Section -->
+        <div class="section1">
+            <h3>Planners</h3>
+            <div id="containerProduct">
+                <?php foreach ($products_by_category['planners'] ?? [] as $product): ?>
+                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
+                        <div id="box">
+                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
+                            <div id="details">
+                                <h3><?php echo $product['name']; ?></h3>
+                                <h4><?php echo $product['category_name']; ?></h4>
+                                <span>$<?php echo number_format($product['price'], 2); ?></span>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <!-- Totebags Section -->
+        <div class="section1">
+            <h3>Totebags</h3>
+            <div id="containerProduct">
+                <?php foreach ($products_by_category['totebags'] ?? [] as $product): ?>
+                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
+                        <div id="box">
+                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
+                            <div id="details">
+                                <h3><?php echo $product['name']; ?></h3>
+                                <h4><?php echo $product['category_name']; ?></h4>
+                                <span>$<?php echo number_format($product['price'], 2); ?></span>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <!-- Tumblers Section -->
+        <div class="section1">
+            <h3>Tumblers</h3>
+            <div id="containerProduct">
+                <?php foreach ($products_by_category['tumblers'] ?? [] as $product): ?>
+                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
+                        <div id="box">
+                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
+                            <div id="details">
+                                <h3><?php echo $product['name']; ?></h3>
+                                <h4><?php echo $product['category_name']; ?></h4>
+                                <span>$<?php echo number_format($product['price'], 2); ?></span>
+                            </div>
+                        </div>
+                    </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
     </div>
 
-    <!-- Footer -->
-    <div id="footer"></div>
+    <div id="footer">Loading...</div>
     <script>
         fetch('footer.php')
             .then(response => response.text())
             .then(data => document.getElementById('footer').innerHTML = data)
-            .catch(error => console.error('Error loading footer: ', error));
+            .catch(error => console.error('Error loading footer:', error));
     </script>
 </body>
 </html>

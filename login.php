@@ -88,7 +88,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <input class="btn" type="submit" value="Sign In">
                 </div>
                 <div class="group">
-                    <span>Do Not Have an account? <a href="register.html">Register</a></span>
+                    <span>Do Not Have an account? <a href="index.php">Register</a></span>
                 </div>
             </form>
         </div>
