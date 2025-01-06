@@ -42,7 +42,6 @@ include 'config.php';
                         <th>Actions</th>
                     </tr>
                 </thead>
-
                 <tbody>
                     <!-- Fetched rows will be inserted here -->
                 </tbody>
@@ -71,7 +70,7 @@ include 'config.php';
 
         </div>
 
-        <!-- Orders Section -->
+        <!-- Other sections -->
         <div id="orders-section" class="section">
             <h2>Orders</h2>
             <table id="orders-table">
@@ -90,7 +89,6 @@ include 'config.php';
             </table>
         </div>
 
-        <!-- Feedback Section -->
         <div id="feedback-section" class="section">
             <h2>Feedback</h2>
             <table id="feedback-table">
@@ -130,16 +128,6 @@ include 'config.php';
             });
         }
 
-        function fetchOrders() {
-            $.ajax({
-                url: 'fetch_orders.php',
-                type: 'GET',
-                success: function (data) {
-                    $('#orders-table tbody').html(data);
-                }
-            });
-        }
-
         $('#add-product-button').click(function () {
             $('#form-title').text('Add Product');
             $('#product-id').val('');
@@ -167,7 +155,7 @@ include 'config.php';
             const files = $('#product-imgs')[0].files;
             if (files.length > 0) {
                 for (let i = 0; i < files.length; i++) {
-                    formData.append('imgs[]', files[i]);
+                    formData.append('images[]', files[i]); // Updated key name
                 }
             }
 
@@ -203,11 +191,7 @@ include 'config.php';
 
         $(document).ready(function () {
             fetchCategories();
-        });
-
-        $(document).ready(function () {
             fetchProducts();
-            fetchOrders();
         });
     </script>
 </body>
