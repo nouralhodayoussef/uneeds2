@@ -64,8 +64,8 @@ include 'config.php';
                 <select id="product-category">
                     <!-- Categories fetched via AJAX -->
                 </select>
-                <label for="product-img">Image:</label>
-                <input type="file" id="product-img">
+                <label for="product-imgs">Images:</label>
+                <input type="file" id="product-imgs" multiple>
                 <button id="save-product-button">Save</button>
             </div>
 
@@ -145,8 +145,10 @@ include 'config.php';
             $('#product-id').val('');
             $('#product-name').val('');
             $('#product-price').val('');
-            $('#product-img').val('');
             $('#product-description').val('');
+            $('#product-stock').val('');
+            $('#product-category').val('');
+            $('#product-imgs').val('');
             $('#product-form').show();
 
             $('html, body').animate({
@@ -155,18 +157,18 @@ include 'config.php';
         });
 
         $('#save-product-button').click(function () {
-            const productId = $('#product-id').val();
             const formData = new FormData();
-            formData.append('id', productId);
             formData.append('name', $('#product-name').val());
             formData.append('description', $('#product-description').val());
             formData.append('price', $('#product-price').val());
             formData.append('stock', $('#product-stock').val());
             formData.append('category_id', $('#product-category').val());
 
-            const file = $('#product-img')[0].files[0];
-            if (file) {
-                formData.append('img', file);
+            const files = $('#product-imgs')[0].files;
+            if (files.length > 0) {
+                for (let i = 0; i < files.length; i++) {
+                    formData.append('imgs[]', files[i]);
+                }
             }
 
             $.ajax({
@@ -189,8 +191,6 @@ include 'config.php';
             });
         });
 
-
-
         function fetchCategories() {
             $.ajax({
                 url: 'fetch_categories.php',
@@ -204,80 +204,6 @@ include 'config.php';
         $(document).ready(function () {
             fetchCategories();
         });
-
-        function deleteProduct(productId) {
-            if (confirm('Are you sure you want to delete this product?')) {
-                $.ajax({
-                    url: 'delete_product.php',
-                    type: 'POST',
-                    data: { id: productId },
-                    success: function (response) {
-                        alert(response);
-                        fetchProducts();
-                    }
-                });
-            }
-        }
-
-        function editProduct(productId) {
-            $.ajax({
-                url: 'fetch_single_product.php',
-                type: 'GET',
-                data: { id: productId },
-                success: function (data) {
-                    const product = JSON.parse(data);
-                    $('#form-title').text('Edit Product');
-                    $('#product-id').val(product.id);
-                    $('#product-name').val(product.name);
-                    $('#product-description').val(product.description);
-                    $('#product-price').val(product.price);
-                    $('#product-stock').val(product.stock);
-                    $('#product-category').val(product.category_id);
-                    $('#product-form').show();
-
-                    $('html, body').animate({
-                        scrollTop: $('#product-form').offset().top,
-                    }, 500);
-                },
-                error: function () {
-                    alert('Failed to fetch product details.');
-                }
-            });
-        }
-
-
-
-        $(document).ready(function () {
-            function fetchFeedback() {
-                $.ajax({
-                    url: 'fetch_feedback.php', 
-                    type: 'GET',
-                    success: function (data) {
-                        $('#feedback-table tbody').html(data); 
-                    }
-                });
-            }
-
-            // Switch tabs functionality
-            const tabs = document.querySelectorAll('.sidebar ul li');
-            const sections = document.querySelectorAll('.section');
-            tabs.forEach((tab, index) => {
-                tab.addEventListener('click', () => {
-                    tabs.forEach(t => t.classList.remove('active'));
-                    sections.forEach(s => s.classList.remove('active'));
-                    tab.classList.add('active');
-                    sections[index].classList.add('active');
-
-                    if (index === 2) { 
-                        fetchFeedback();
-                    }
-                });
-            });
-
-            fetchFeedback();
-        });
-
-
 
         $(document).ready(function () {
             fetchProducts();
