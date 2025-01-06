@@ -1,5 +1,6 @@
 <?php
 require_once 'config.php';
+session_start();
 
 $product_id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
@@ -80,14 +81,32 @@ if (empty($images)) {
                 <?php endforeach; ?>
             </div>
             <div id="button">
-                <button onclick="addToCart()">Add to Cart</button>
+                <button onclick="addToCart(<?php echo htmlspecialchars($product_id); ?>)">Add to Cart</button>
             </div>
             <script>
                 function changeImage(src) {
                     document.getElementById("imgDetails").src = src;
                 }
-                function addToCart() {
-                    alert("Product added to cart!");
+                function addToCart(productId) {
+                    fetch('shopping_cart.php', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify({ product_id: productId, quantity: 1 })
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Product added to cart!');
+                        } else {
+                            alert('Failed to add product to cart: ' + data.error);
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
+                        alert('An error occurred while adding the product to the cart.');
+                    });
                 }
             </script>
         </div>

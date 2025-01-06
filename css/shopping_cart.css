@@ -1,0 +1,127 @@
+:root {
+    --main-color: #ffffff;
+    --text-color: #000000;
+    --bg-color: #edecec;
+    --span-color: rgb(254, 216, 132);
+    --font-family: "Lato", sans-serif;
+  }
+
+
+#cartMainContainer
+{
+    padding: 0px 50px;
+    padding-bottom: 90px;
+}
+#cartContainer
+{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+}
+h4 span{
+    color: var(--span-color);
+}
+#box img
+{
+    width: 80px;
+    float: left;
+    height: auto;
+    border-radius: 10px;
+    margin-right: 50px;
+}
+#boxContainer
+{
+    display: grid;
+    grid-gap: 20px;
+    padding: 20px;
+    width: 100%;
+}
+#box
+{
+    background-color: white;
+    box-shadow: 1px 2px 6px 2px rgb(219, 219, 219);
+    border-radius: 10px;
+    width: 100%;
+    /* margin: auto */
+    padding: 20px 10px;
+    z-index: 10;
+}
+#box:hover
+{
+    box-shadow: 0px 1px 3px 2px rgb(185, 185, 185);
+}
+#totalContainer
+{
+    width: 50%;
+    padding: 20px;
+    margin: auto;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 1px 2px 6px 2px rgb(219, 219, 219);
+    z-index: 10;
+}
+#totalContainer:hover
+{
+    box-shadow: 0px 1px 3px 2px rgb(185, 185, 185);
+}
+button
+{
+    padding: 8px 12px;
+    background-color: black;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+button a
+{
+    text-decoration: none;
+    color: white;
+    font-size: 15px;
+    pointer-events: all;
+}
+
+button:hover
+{
+    background-color: var(--span-color);
+}
+button a:focus
+{
+    outline: none;
+}
+
+/* ----------------------------- MEDIA QUERY --------------------------- */
+
+@media(max-width: 800px)
+{
+    #box img
+    {
+        width: 60px;
+        margin-right: 20px;
+    }
+    h3, h4
+    {
+        font-size: 14px;
+    }
+    #total h2
+    {
+        font-size: 18px;
+    }
+    #cartMainContainer
+    {
+        padding: 0px 20px;
+        padding-bottom: 50px;
+    }
+}
+@media(max-width: 555px)
+{
+    #cartContainer
+    {
+        display: grid;
+        grid-template-columns: 1fr;
+    }    
+    #boxContainer
+    {
+        padding: 20px;
+        width: 80%;
+    }
+}

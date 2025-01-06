@@ -43,6 +43,7 @@ while ($product = mysqli_fetch_assoc($result)) {
                 .catch(error => console.error('Error loading header:', error));
         });
     </script>
+    
 
     <div id="mainContainer">
         <h1>All The Products U-need!</h1>
@@ -151,5 +152,7 @@ while ($product = mysqli_fetch_assoc($result)) {
             .then(data => document.getElementById('footer').innerHTML = data)
             .catch(error => console.error('Error loading footer:', error));
     </script>
+    
+    
 </body>
 </html>
