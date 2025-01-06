@@ -40,3 +40,5 @@ const slide = (direction) => {
 
 prevBtn.addEventListener('click', () => slide('prev'));
 nextBtn.addEventListener('click', () => slide('next'));
+
+
