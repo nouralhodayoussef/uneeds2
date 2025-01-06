@@ -25,7 +25,7 @@
 
       <div class="righthead">
         <i class="bx bx-menu menu-icon" id="menu-icon"></i>
-        <a href="shopping_cart.php"><i class="bx bx-cart shop-cart"></i></a>
+        <a href="cart_style.php"><i class="bx bx-cart shop-cart"></i></a>
         <a href="login.php" class="btn">SIGN UP</a>
       </div>
     </header>
