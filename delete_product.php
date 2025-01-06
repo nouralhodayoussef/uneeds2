@@ -1,13 +1,23 @@
 <?php
 include 'config.php';
 
-$id = $_POST['id'];
-$stmt = $con->prepare("DELETE FROM products WHERE id = ?");
-$stmt->bind_param("i", $id);
-if ($stmt->execute()) {
-    echo "Product deleted successfully.";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $id = $_POST['id'] ?? null;
+
+    if ($id) {
+        $stmt = $con->prepare("DELETE FROM products WHERE id = ?");
+        $stmt->bind_param("i", $id);
+
+        if ($stmt->execute()) {
+            echo "Product deleted successfully.";
+        } else {
+            echo "Error deleting product: " . $con->error;
+        }
+        $stmt->close();
+    } else {
+        echo "No product ID provided.";
+    }
 } else {
-    echo "Error deleting product: " . $con->error;
+    echo "Invalid request method.";
 }
-$stmt->close();
 ?>

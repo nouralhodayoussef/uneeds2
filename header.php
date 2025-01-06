@@ -12,7 +12,7 @@
   </head>
   <body>
     <header class="header" id="header">
-      <a href="home.html">
+      <a href="home.php">
         <img src="imgs/logo.png" alt="Uneeds Logo" />
         <h2>Uneeds</h2>
       </a>
