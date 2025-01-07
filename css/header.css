@@ -100,6 +100,62 @@
   .navbar.active {
     display: block;
   }
+
+  /* Add this at the end of header.css */
+.righthead {
+  display: flex;
+  gap: 2rem;
+  pointer-events: auto;
+  align-items: center;
+}
+
+.welcome-msg {
+  max-width: 100px; /* Limit the width */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 0.9rem; /* Adjust font size */
+  text-align: center;
+}
+
+@media (max-width: 841px) {
+  .welcome-msg {
+    display: none; /* Hide the name for small screens */
+  }
+  .menu-icon {
+    display: block;
+  }
+  .righthead {
+    gap: 1rem;
+  }
+}
+
+@media (max-width: 400px) {
+  img {
+    width: 40px;
+    height: 40px;
+  }
+  h2 {
+    font-size: 1rem;
+  }
+  .menu-icon {
+    font-size: 1.2rem;
+  }
+  .shop-cart {
+    font-size: 1.2rem;
+  }
+  header {
+    padding-left: 15px;
+    padding-right: 50px;
+  }
+}
+
+@media (max-width: 272px) {
+  .shop-cart {
+    margin-left: 40%;
+  }
+}
+
   @media (max-width: 992px) {
     .navbar ul {
       margin-left: -50px;

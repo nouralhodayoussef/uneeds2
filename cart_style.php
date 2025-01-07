@@ -80,7 +80,7 @@ $user_id = $_SESSION['user_id'];
                 echo "<img src='" . $image_url . "' alt='" . $product_name . "' />";
                 echo "<h3>" . $product_name . "</h3>";
                 echo "<h4>Amount: <span> $" . $product_price . "</span></h4>";
-                echo "<p>Quantity: <span>" . $quantity . "</span></p>"; // Display the quantity
+                echo "<p>Quantity: <span>" . $quantity . "</span></p>"; 
                 echo "</div>"; 
                 echo "</div>";
             }

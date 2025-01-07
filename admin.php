@@ -154,40 +154,40 @@ include 'config.php';
         });
 
         $('#save-product-button').click(function () {
-    const formData = new FormData();
-    formData.append('id', $('#product-id').val());
-    formData.append('name', $('#product-name').val());
-    formData.append('description', $('#product-description').val());
-    formData.append('price', $('#product-price').val());
-    formData.append('stock', $('#product-stock').val());
-    formData.append('category_id', $('#product-category').val());
+            const formData = new FormData();
+            formData.append('id', $('#product-id').val());
+            formData.append('name', $('#product-name').val());
+            formData.append('description', $('#product-description').val());
+            formData.append('price', $('#product-price').val());
+            formData.append('stock', $('#product-stock').val());
+            formData.append('category_id', $('#product-category').val());
 
-    const files = $('#product-imgs')[0].files;
-    if (files.length > 0) {
-        for (let i = 0; i < files.length; i++) {
-            formData.append('images[]', files[i]);
-        }
-    }
-
-    $.ajax({
-        url: 'update_product.php', 
-        type: 'POST',
-        data: formData,
-        processData: false,
-        contentType: false,
-        success: function (response) {
-            alert(response);
-            if (response.includes('success')) {
-                $('#product-form').hide();
-                fetchProducts(); 
+            const files = $('#product-imgs')[0].files;
+            if (files.length > 0) {
+                for (let i = 0; i < files.length; i++) {
+                    formData.append('images[]', files[i]);
+                }
             }
-        },
-        error: function (xhr, status, error) {
-            console.error('Error:', error);
-            alert('An error occurred while saving the product.');
-        }
-    });
-});
+
+            $.ajax({
+                url: 'update_product.php',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    alert(response);
+                    if (response.includes('success')) {
+                        $('#product-form').hide();
+                        fetchProducts();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('An error occurred while saving the product.');
+                }
+            });
+        });
 
 
         function fetchCategories() {
@@ -203,11 +203,14 @@ include 'config.php';
         $(document).ready(function () {
             fetchCategories();
             fetchProducts();
+            $('#feedback-tab').click(function () {
+                fetchFeedback();
+            });
         });
 
         $(document).on('click', '.delete-image', function () {
             const imagePath = $(this).data('image');
-            const productId = $('#product-id').val(); 
+            const productId = $('#product-id').val();
 
             if (confirm('Are you sure you want to delete this image?')) {
                 $.ajax({
@@ -216,7 +219,7 @@ include 'config.php';
                     data: { product_id: productId, image_url: imagePath },
                     success: function (response) {
                         alert(response);
-                        editProduct(productId); 
+                        editProduct(productId);
                     },
                     error: function (xhr, status, error) {
                         console.error('Error:', error);
@@ -228,87 +231,100 @@ include 'config.php';
 
 
         function editProduct(productId) {
-    $.ajax({
-        url: 'fetch_single_product.php',
-        type: 'GET',
-        data: { id: productId },
-        success: function(response) {
-            const data = JSON.parse(response);
-            
-            if (data.error) {
-                alert(data.error);
-                return;
-            }
-            
-            $('#form-title').text('Edit Product');
-            $('#product-id').val(data.product.id);
-            $('#product-name').val(data.product.name);
-            $('#product-description').val(data.product.description);
-            $('#product-price').val(data.product.price);
-            $('#product-stock').val(data.product.stock);
-            $('#product-category').val(data.product.category_id); 
-            
-            $('#product-images').html('');
-            data.images.forEach(function(imageUrl) {
-                $('#product-images').append(`
+            $.ajax({
+                url: 'fetch_single_product.php',
+                type: 'GET',
+                data: { id: productId },
+                success: function (response) {
+                    const data = JSON.parse(response);
+
+                    if (data.error) {
+                        alert(data.error);
+                        return;
+                    }
+
+                    $('#form-title').text('Edit Product');
+                    $('#product-id').val(data.product.id);
+                    $('#product-name').val(data.product.name);
+                    $('#product-description').val(data.product.description);
+                    $('#product-price').val(data.product.price);
+                    $('#product-stock').val(data.product.stock);
+                    $('#product-category').val(data.product.category_id);
+
+                    $('#product-images').html('');
+                    data.images.forEach(function (imageUrl) {
+                        $('#product-images').append(`
                     <div class="image-container">
                         <img src="${imageUrl}" alt="Product Image" style="max-width: 100px; max-height: 100px;">
                         <button class="delete-image" data-url="${imageUrl}">Delete</button>
                     </div>
                 `);
+                    });
+
+                    $('#product-form').show();
+
+                    $('html, body').animate({
+                        scrollTop: $('#product-form').offset().top,
+                    }, 500);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('An error occurred while fetching product details.');
+                }
             });
-
-            $('#product-form').show();
-
-            $('html, body').animate({
-                scrollTop: $('#product-form').offset().top,
-            }, 500);
-        },
-        error: function(xhr, status, error) {
-            console.error('Error:', error);
-            alert('An error occurred while fetching product details.');
         }
-    });
-}
 
-function deleteProduct(productId) {
-    $.ajax({
-        url: 'delete_product.php', 
-        type: 'POST',
-        data: { id: productId },
-        success: function (response) {
-            alert(response);
-            fetchProducts(); 
-        },
-        error: function (xhr, status, error) {
-            console.error('Error:', error);
-            alert('An error occurred while deleting the product.');
+        function deleteProduct(productId) {
+            $.ajax({
+                url: 'delete_product.php',
+                type: 'POST',
+                data: { id: productId },
+                success: function (response) {
+                    alert(response);
+                    fetchProducts();
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error:', error);
+                    alert('An error occurred while deleting the product.');
+                }
+            });
         }
-    });
-}
 
 
         $(document).on('click', '.delete-image', function () {
-    const imagePath = $(this).data('image');
-    const productId = $('#product-id').val(); 
+            const imagePath = $(this).data('image');
+            const productId = $('#product-id').val();
 
-    if (confirm('Are you sure you want to delete this image?')) {
-        $.ajax({
-            url: 'delete_product_image.php',
-            type: 'POST',
-            data: { product_id: productId, image_url: imagePath },
-            success: function (response) {
-                alert(response);
-                editProduct(productId); 
-            },
-            error: function (xhr, status, error) {
-                console.error('Error:', error);
-                alert('An error occurred while deleting the image.');
+            if (confirm('Are you sure you want to delete this image?')) {
+                $.ajax({
+                    url: 'delete_product_image.php',
+                    type: 'POST',
+                    data: { product_id: productId, image_url: imagePath },
+                    success: function (response) {
+                        alert(response);
+                        editProduct(productId);
+                    },
+                    error: function (xhr, status, error) {
+                        console.error('Error:', error);
+                        alert('An error occurred while deleting the image.');
+                    }
+                });
             }
         });
-    }
-});
-
+        function fetchFeedback() {
+            $.ajax({
+                url: 'fetch_feedback.php', 
+                type: 'GET',
+                success: function (data) {
+                    $('#feedback-table tbody').html(data); 
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching feedback:', error);
+                    alert('An error occurred while fetching feedback.');
+                }
+            });
+        }
+        
 
 
 
