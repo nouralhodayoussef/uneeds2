@@ -11,12 +11,14 @@
 {
     padding: 0px 50px;
     padding-bottom: 90px;
+    z-index: 1;
 }
 #cartContainer
 {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 20px;
+    z-index: 1;
 }
 h4 span{
     color: var(--span-color);
@@ -50,6 +52,7 @@ h4 span{
 {
     box-shadow: 0px 1px 3px 2px rgb(185, 185, 185);
 }
+
 #totalContainer
 {
     width: 50%;
@@ -58,19 +61,26 @@ h4 span{
     background-color: white;
     border-radius: 10px;
     box-shadow: 1px 2px 6px 2px rgb(219, 219, 219);
-    z-index: 10;
+    z-index: 1;
 }
 #totalContainer:hover
 {
     box-shadow: 0px 1px 3px 2px rgb(185, 185, 185);
 }
-button
-{
+button {
     padding: 8px 12px;
     background-color: black;
     border: none;
     border-radius: 5px;
     cursor: pointer;
+    color: white; 
+    font-size: 15px;
+    text-align: center; 
+    position: relative;
+    z-index: 1000;
+}
+button:hover {
+    background-color: var(--span-color);
 }
 button a
 {
@@ -80,14 +90,24 @@ button a
     pointer-events: all;
 }
 
-button:hover
-{
-    background-color: var(--span-color);
-}
 button a:focus
 {
     outline: none;
 }
+
+.delete-button {
+    padding: 8px 12px;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+}
+.delete-button:hover {
+    background-color: darkred;
+}
+
 
 /* ----------------------------- MEDIA QUERY --------------------------- */
 

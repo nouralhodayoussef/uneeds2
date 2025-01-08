@@ -1,45 +1,72 @@
 <?php
-include 'config.php'; 
+include 'config.php';
 
-$sql = "
+// Query to fetch orders with their products
+$query = "
     SELECT 
-        orders.id AS order_id,
-        orders.user_id,
-        orders.order_status,
-        orders.total_price,
-        GROUP_CONCAT(order_details.product_id) AS product_ids,
-        GROUP_CONCAT(order_details.quantity) AS quantities
-    FROM 
-        orders
-    LEFT JOIN 
-        order_details ON orders.id = order_details.order_id
-    GROUP BY 
-        orders.id";
+    o.id AS order_id,
+    u.first_name AS customer,
+    o.order_status,
+    o.total_price,
+    p.name AS product_name,
+    od.quantity
+FROM orders o
+INNER JOIN users u ON o.user_id = u.id
+INNER JOIN order_details od ON o.id = od.order_id
+INNER JOIN products p ON od.product_id = p.id
+ORDER BY o.id ASC
+";
 
-$result = $con->query($sql);
+$result = $con->query($query);
 
-$output = '';
 if ($result->num_rows > 0) {
+    $output = '';
+    $currentOrderId = null;
+
     while ($row = $result->fetch_assoc()) {
-        $product_ids = $row['product_ids'] ? $row['product_ids'] : 'No products';
-        $quantities = $row['quantities'] ? $row['quantities'] : 'No quantities';
-        
-        $user_sql = "SELECT name FROM user WHERE id = " . $row['user_id'];
-        $user_result = $con->query($user_sql);
-        $user_name = ($user_result->num_rows > 0) ? $user_result->fetch_assoc()['name'] : 'Unknown User';
-        
-        $output .= '
-            <tr>
-                <td>' . $row['order_id'] . '</td>
-                <td>' . $user_name . '</td>
-                <td>' . $product_ids . '</td>
-                <td>' . $quantities . '</td>
-                <td>$' . number_format($row['total_price'], 2) . '</td>
-                <td>' . $row['order_status'] . '</td>
-            </tr>';
+        // New Order Row
+        if ($row['order_id'] !== $currentOrderId) {
+            if ($currentOrderId !== null) {
+                $output .= '</ul></td>
+                    <td>
+                        <select class="order-status-select" data-order-id="' . $currentOrderId . '">
+                            <option value="Pending"' . ($currentOrderStatus === 'Pending' ? ' selected' : '') . '>Pending</option>
+                            <option value="Shipped"' . ($currentOrderStatus === 'Shipped' ? ' selected' : '') . '>Shipped</option>
+                            <option value="Delivered"' . ($currentOrderStatus === 'Delivered' ? ' selected' : '') . '>Delivered</option>
+                            <option value="Cancelled"' . ($currentOrderStatus === 'Cancelled' ? ' selected' : '') . '>Cancelled</option>
+                        </select>
+                    </td>
+                </tr>';
+            }
+
+            $currentOrderId = $row['order_id'];
+            $currentOrderStatus = $row['order_status'];
+
+            $output .= '
+                <tr>
+                    <td>' . $row['order_id'] . '</td>
+                    <td>' . $row['customer'] . '</td>
+                    <td>
+                        <ul>';
+        }
+
+        // Add product details under current order
+        $output .= '<li>' . $row['product_name'] . ' (Qty: ' . $row['quantity'] . ')</li>';
     }
+
+    // Close the last order
+    $output .= '</ul></td>
+        <td>
+            <select class="order-status-select" data-order-id="' . $currentOrderId . '">
+                <option value="Pending"' . ($currentOrderStatus === 'Pending' ? ' selected' : '') . '>Pending</option>
+                <option value="Ready"' . ($currentOrderStatus === 'Ready' ? ' selected' : '') . '>Ready</option>
+                <option value="Delivered"' . ($currentOrderStatus === 'Delivered' ? ' selected' : '') . '>Delivered</option>
+                <option value="Other"' . ($currentOrderStatus === 'Other' ? ' selected' : '') . '>Other</option>
+            </select>
+        </td>
+    </tr>';
 } else {
-    $output = '<tr><td colspan="6">No orders found.</td></tr>';
+    $output = '<tr><td colspan="5">No orders found</td></tr>';
 }
 
 echo $output;

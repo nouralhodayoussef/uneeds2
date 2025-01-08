@@ -120,6 +120,22 @@ input {
     margin-bottom: 8px;
 }
 
+.order-status-select {
+    padding: 5px;
+    font-size: 14px;
+}
+
+.delete-order {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.delete-order:hover {
+    background-color: #d32f2f;
+}
 
 
 /* Responsive Design */

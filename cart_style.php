@@ -80,7 +80,12 @@ $user_id = $_SESSION['user_id'];
                 echo "<img src='" . $image_url . "' alt='" . $product_name . "' />";
                 echo "<h3>" . $product_name . "</h3>";
                 echo "<h4>Amount: <span> $" . $product_price . "</span></h4>";
-                echo "<p>Quantity: <span>" . $quantity . "</span></p>"; 
+                echo "<p>Quantity: <span>" . $quantity . "</span></p>";
+                // Add a delete button
+                echo "<form action='delete_from_cart.php' method='POST' style='margin-top: 10px;'>";
+                echo "<input type='hidden' name='product_id' value='" . $product_id . "' />";
+                echo "<button type='submit' class='delete-button'>Remove</button>";
+                echo "</form>";
                 echo "</div>"; 
                 echo "</div>";
             }

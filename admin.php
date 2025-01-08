@@ -87,16 +87,17 @@ include 'config.php';
                     <tr>
                         <th>Order ID</th>
                         <th>Customer</th>
-                        <th>Product</th>
-                        <th>Total Price</th>
+                        <th>Products</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <!-- Fetched rows will be inserted here -->
+                    <!-- Orders will be dynamically populated here -->
                 </tbody>
             </table>
         </div>
+
+
 
         <div id="feedback-section" class="section">
             <h2>Feedback</h2>
@@ -188,7 +189,45 @@ include 'config.php';
                 }
             });
         });
+        $(document).ready(function () {
+            $('#orders-tab').click(function () {
+                fetchOrders();
+            });
+        });
 
+        $(document).on('change', '.order-status-select', function () {
+            const orderId = $(this).data('order-id');
+            const newStatus = $(this).val();
+
+            $.ajax({
+                url: 'update_order_status.php',
+                type: 'POST',
+                data: { order_id: orderId, new_status: newStatus },
+                success: function (response) {
+                    alert(response);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error updating order status:', error);
+                    alert('An error occurred while updating the order status.');
+                }
+            });
+        });
+
+
+
+        function fetchOrders() {
+            $.ajax({
+                url: 'fetch_orders.php',
+                type: 'GET',
+                success: function (data) {
+                    $('#orders-table tbody').html(data);
+                },
+                error: function (xhr, status, error) {
+                    console.error('Error fetching orders:', error);
+                    alert('An error occurred while fetching orders.');
+                }
+            });
+        }
 
         function fetchCategories() {
             $.ajax({
@@ -313,10 +352,10 @@ include 'config.php';
         });
         function fetchFeedback() {
             $.ajax({
-                url: 'fetch_feedback.php', 
+                url: 'fetch_feedback.php',
                 type: 'GET',
                 success: function (data) {
-                    $('#feedback-table tbody').html(data); 
+                    $('#feedback-table tbody').html(data);
                 },
                 error: function (xhr, status, error) {
                     console.error('Error fetching feedback:', error);
@@ -324,7 +363,7 @@ include 'config.php';
                 }
             });
         }
-        
+
 
 
 
