@@ -2,7 +2,7 @@
 session_start();
 include 'config.php';
 
-$selectedProductIds = [1, 2, 3, 4];
+$selectedProductIds = [1, 18, 45, 46];
 
 // Prepare placeholders for the query
 $placeholders = implode(',', array_fill(0, count($selectedProductIds), '?'));
