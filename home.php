@@ -137,7 +137,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
                 <div style="padding-right: 25px;">
                     <p>Your one-stop-shop for all university needs</p>
                 </div>
-                <a class="button" href="products.html">Show Now</a>
+                <a class="button" href="products.php">Show Now</a>
             </div>
             <div>
                 <img src="imgs/3.png" alt="">
