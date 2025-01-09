@@ -2,6 +2,26 @@
 session_start();
 include 'config.php';
 
+$selectedProductIds = [1, 2, 3, 4]; // Replace with actual product IDs you want to display
+
+// Prepare placeholders for the query
+$placeholders = implode(',', array_fill(0, count($selectedProductIds), '?'));
+
+// Prepare the query to fetch product details along with images
+$query = "
+    SELECT p.id, p.name, p.price, i.image_url 
+    FROM products p 
+    LEFT JOIN imgs i ON p.id = i.product_id 
+    WHERE p.id IN ($placeholders)
+";
+
+$stmt = $con->prepare($query);
+
+// Bind product IDs dynamically
+$stmt->bind_param(str_repeat('i', count($selectedProductIds)), ...$selectedProductIds);
+$stmt->execute();
+$result = $stmt->get_result();
+$products = $result->fetch_all(MYSQLI_ASSOC);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
     header('Content-Type: application/json');
@@ -128,55 +148,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
 
     <!-- Slider -->
     <div class="sliderdiv">
-        <div class="slider">
-            <button class="slider-btn prev"><i class="bx bx-left-arrow-alt"></i></button>
-            <div id="containerProduct" class="slider-track">
-                <div id="box">
-
-                    <a href="productDetails.html">
-                        <img src="imgs/products/plan1.jpeg" alt="Notebook A4" />
-                        <div id="details">
-                            <h3>Pink Mug</h3>
-                            <h4>Mugs</h4>
-
-                        </div>
-                    </a>
-                </div>
-                <div id="box">
-                    <a href="productDetails.html">
-                        <img src="imgs/products/plan1.jpeg" alt="Gel Pen - Blue" />
-                        <div id="details">
-                            <h3>Daily Planner</h3>
-                            <h4>Planners</h4>
-
-                        </div>
-                    </a>
-                </div>
-                <div id="box">
-                    <a href="productDetails.html">
-                        <img src="imgs/products/plan1.jpeg" alt="Leather Bound Journal" />
-                        <div id="details">
-                            <h3>Leather Journal</h3>
-                            <h4>Stationery</h4>
-
-                        </div>
-                    </a>
-                </div>
-                <div id="box">
-                    <a href="productDetails.html">
-                        <img src="imgs/products/plan1.jpeg" alt="" />
-                        <div id="details">
-                            <h3>Stitch Tumbler</h3>
-                            <h4>Tumblers</h4>
-
-                        </div>
-                    </a>
-                </div>
-
+    <div class="slider">
+        <button class="slider-btn prev"><i class="bx bx-left-arrow-alt"></i></button>
+        <div id="containerProduct" class="slider-track">
+            <?php foreach ($products as $product): ?>
+            <div id="box">
+                <a href="product_detail.php?id=<?= htmlspecialchars($product['id']) ?>">
+                    <img src="<?= htmlspecialchars($product['image_url']) ?>" alt="<?= htmlspecialchars($product['name']) ?>" />
+                    <div id="details">
+                        <h3><?= htmlspecialchars($product['name']) ?></h3>
+                        <h4>$<?= htmlspecialchars(number_format($product['price'], 2)) ?></h4>
+                    </div>
+                </a>
             </div>
-            <button class="slider-btn next"><i class="bx bx-right-arrow-alt"></i></button>
+            <?php endforeach; ?>
         </div>
+        <button class="slider-btn next"><i class="bx bx-right-arrow-alt"></i></button>
     </div>
+</div>
+
+
 
 
 
