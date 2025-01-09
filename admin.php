@@ -171,7 +171,7 @@ include 'config.php';
             }
 
             $.ajax({
-                url: 'update_product.php',
+                url: 'save_product.php',
                 type: 'POST',
                 data: formData,
                 processData: false,
