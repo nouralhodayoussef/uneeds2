@@ -2,7 +2,7 @@
 session_start();
 include 'config.php';
 
-$selectedProductIds = [1, 2, 3, 4]; // Replace with actual product IDs you want to display
+$selectedProductIds = [1, 2, 3, 4];
 
 // Prepare placeholders for the query
 $placeholders = implode(',', array_fill(0, count($selectedProductIds), '?'));
