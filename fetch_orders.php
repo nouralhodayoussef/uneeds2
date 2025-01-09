@@ -1,7 +1,6 @@
 <?php
 include 'config.php';
 
-// Query to fetch orders with their products
 $query = "
     SELECT 
     o.id AS order_id,
@@ -50,11 +49,9 @@ if ($result->num_rows > 0) {
                         <ul>';
         }
 
-        // Add product details under current order
         $output .= '<li>' . $row['product_name'] . ' (Qty: ' . $row['quantity'] . ')</li>';
     }
 
-    // Close the last order
     $output .= '</ul></td>
         <td>
             <select class="order-status-select" data-order-id="' . $currentOrderId . '">

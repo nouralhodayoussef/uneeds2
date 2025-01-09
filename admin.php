@@ -364,9 +364,6 @@ include 'config.php';
             });
         }
 
-
-
-
     </script>
 </body>
 

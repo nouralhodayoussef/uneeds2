@@ -11,13 +11,13 @@ $stmt = $con->prepare("INSERT INTO products (name, description, price, stock, ca
 $stmt->bind_param("ssdii", $product_name, $product_description, $product_price, $product_stock, $product_category_id);
 
 if ($stmt->execute()) {
-    $product_id = $stmt->insert_id; 
+    $product_id = $stmt->insert_id;
 
     if (isset($_FILES['images']) && count($_FILES['images']['name']) > 0) {
         $image_stmt = $con->prepare("INSERT INTO imgs (product_id, image_url) VALUES (?, ?)");
-        
+
         for ($i = 0; $i < count($_FILES['images']['name']); $i++) {
-            $image_url = 'imgs/' . $_FILES['images']['name'][$i]; 
+            $image_url = 'imgs/' . $_FILES['images']['name'][$i];
 
             if (move_uploaded_file($_FILES['images']['tmp_name'][$i], $image_url)) {
                 $image_stmt->bind_param("is", $product_id, $image_url);

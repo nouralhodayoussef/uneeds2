@@ -4,7 +4,7 @@ include 'config.php';
 
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
-    header('Content-Type: application/json'); 
+    header('Content-Type: application/json');
     if (isset($_SESSION['user_id'])) {
         $user_id = $_SESSION['user_id'];
         $message = trim($_POST['feedback']);
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
     } else {
         echo json_encode(['status' => 'error', 'message' => 'You must be logged in to submit feedback.']);
     }
-    exit(); 
+    exit();
 }
 ?>
 
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
             const feedbackForm = document.querySelector(".feedback-form");
 
             feedbackForm.addEventListener("submit", function (e) {
-                e.preventDefault(); 
+                e.preventDefault();
 
                 const feedbackInput = document.querySelector(".feedback-input");
                 const feedback = feedbackInput.value.trim();
@@ -66,12 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['feedback'])) {
                         .then((response) => response.json())
                         .then((data) => {
                             if (data.status === "success") {
-                                console.log(data.message); 
-                                alert(data.message); 
-                                feedbackInput.value = ""; 
+                                console.log(data.message);
+                                alert(data.message);
+                                feedbackInput.value = "";
                             } else {
-                                console.error(data.message); 
-                                alert(data.message); 
+                                console.error(data.message);
+                                alert(data.message);
                             }
                         })
                         .catch((error) => console.error("Error:", error));

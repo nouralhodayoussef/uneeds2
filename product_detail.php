@@ -43,6 +43,7 @@ if (empty($images)) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -51,6 +52,7 @@ if (empty($images)) {
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="css/product_detail.css" />
 </head>
+
 <body>
     <div id="header"></div>
     <script>
@@ -64,7 +66,8 @@ if (empty($images)) {
 
     <div id="containerD">
         <div id="imageSection">
-            <img id="imgDetails" src="<?php echo htmlspecialchars($images[0]); ?>" alt="<?php echo htmlspecialchars($product['name']); ?>" />
+            <img id="imgDetails" src="<?php echo htmlspecialchars($images[0]); ?>"
+                alt="<?php echo htmlspecialchars($product['name']); ?>" />
         </div>
         <div id="productDetails">
             <h1><?php echo htmlspecialchars($product['name']); ?></h1>
@@ -76,8 +79,9 @@ if (empty($images)) {
             </div>
             <div id="productPreview">
                 <h3>Product Preview</h3>
-                <?php foreach ($images as $image_url) : ?>
-                    <img src="<?php echo htmlspecialchars($image_url); ?>" alt="Preview" onclick="changeImage('<?php echo htmlspecialchars($image_url); ?>')" />
+                <?php foreach ($images as $image_url): ?>
+                    <img src="<?php echo htmlspecialchars($image_url); ?>" alt="Preview"
+                        onclick="changeImage('<?php echo htmlspecialchars($image_url); ?>')" />
                 <?php endforeach; ?>
             </div>
             <div id="button">
@@ -95,18 +99,18 @@ if (empty($images)) {
                         },
                         body: JSON.stringify({ product_id: productId, quantity: 1 })
                     })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Product added to cart!');
-                        } else {
-                            alert('Failed to add product to cart: ' + data.error);
-                        }
-                    })
-                    .catch(error => {
-                        console.error('Error:', error);
-                        alert('An error occurred while adding the product to the cart.');
-                    });
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.success) {
+                                alert('Product added to cart!');
+                            } else {
+                                alert('Failed to add product to cart: ' + data.error);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                            alert('An error occurred while adding the product to the cart.');
+                        });
                 }
             </script>
         </div>
@@ -120,4 +124,5 @@ if (empty($images)) {
             .catch(error => console.error('Error loading footer:', error));
     </script>
 </body>
+
 </html>

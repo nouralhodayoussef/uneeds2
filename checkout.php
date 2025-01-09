@@ -35,7 +35,7 @@ if ($cart_result->num_rows > 0) {
     $order_id = $order_stmt->insert_id;
     $order_stmt->close();
 
-    $cart_result->data_seek(0); 
+    $cart_result->data_seek(0);
     $order_details_sql = "INSERT INTO order_details (order_id, product_id, quantity, price) VALUES (?, ?, ?, ?)";
     $order_details_stmt = $con->prepare($order_details_sql);
 

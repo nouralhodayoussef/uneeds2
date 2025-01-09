@@ -72,11 +72,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
     <title>Sign Up</title>
     <style>
-        .userError{
-           color: red;
-           text-align: center;
-          
+        .userError {
+            color: red;
+            text-align: center;
+
         }
+
         .error {
             color: red;
             font-size: 14px;
@@ -102,49 +103,62 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     </div>
                     <div>
                         <h2>Register Now</h2>
-                        <p class="userError <?php echo !empty($userExistsError) ? 'visible' : ''; ?>"><?php echo $userExistsError; ?></p>
+                        <p class="userError <?php echo !empty($userExistsError) ? 'visible' : ''; ?>">
+                            <?php echo $userExistsError; ?></p>
                     </div>
                 </div>
 
                 <div class="firstinput">
                     <div>
-                        <input type="text" class="name-box" name="fname" placeholder="First Name" value="<?php echo htmlspecialchars($_POST['fname'] ?? ''); ?>">
-                        <p class="error <?php echo !empty($errors['fname']) ? 'visible' : ''; ?>"><?php echo $errors['fname']; ?></p>
+                        <input type="text" class="name-box" name="fname" placeholder="First Name"
+                            value="<?php echo htmlspecialchars($_POST['fname'] ?? ''); ?>">
+                        <p class="error <?php echo !empty($errors['fname']) ? 'visible' : ''; ?>">
+                            <?php echo $errors['fname']; ?></p>
                     </div>
                     <div>
-                        <input type="text" class="name-box" name="lname" placeholder="Last Name" value="<?php echo htmlspecialchars($_POST['lname'] ?? ''); ?>">
-                        <p class="error <?php echo !empty($errors['lname']) ? 'visible' : ''; ?>"><?php echo $errors['lname']; ?></p>
+                        <input type="text" class="name-box" name="lname" placeholder="Last Name"
+                            value="<?php echo htmlspecialchars($_POST['lname'] ?? ''); ?>">
+                        <p class="error <?php echo !empty($errors['lname']) ? 'visible' : ''; ?>">
+                            <?php echo $errors['lname']; ?></p>
                     </div>
                 </div>
 
                 <div class="input-box">
                     <i class='bx bxs-envelope'></i>
-                    <input type="email" name="email" placeholder="Enter your email" value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" required>
-                    <p class="error <?php echo !empty($errors['email']) ? 'visible' : ''; ?>"><?php echo $errors['email']; ?></p>
+                    <input type="email" name="email" placeholder="Enter your email"
+                        value="<?php echo htmlspecialchars($_POST['email'] ?? ''); ?>" required>
+                    <p class="error <?php echo !empty($errors['email']) ? 'visible' : ''; ?>">
+                        <?php echo $errors['email']; ?></p>
                 </div>
 
                 <div class="input-box">
                     <i class='bx bx-lock'></i>
                     <input type="password" name="password" placeholder="Enter your password" required>
-                    <p class="error <?php echo !empty($errors['password']) ? 'visible' : ''; ?>"><?php echo $errors['password']; ?></p>
+                    <p class="error <?php echo !empty($errors['password']) ? 'visible' : ''; ?>">
+                        <?php echo $errors['password']; ?></p>
                 </div>
 
                 <div class="input-box">
                     <i class='bx bx-lock'></i>
                     <input type="password" name="cPassword" placeholder="Confirm Your password" required>
-                    <p class="error <?php echo !empty($errors['cPassword']) ? 'visible' : ''; ?>"><?php echo $errors['cPassword']; ?></p>
+                    <p class="error <?php echo !empty($errors['cPassword']) ? 'visible' : ''; ?>">
+                        <?php echo $errors['cPassword']; ?></p>
                 </div>
 
                 <div class="input-box">
                     <i class='bx bx-phone'></i>
-                    <input type="text" name="phonenumber" placeholder="Enter your number" value="<?php echo htmlspecialchars($_POST['phonenumber'] ?? ''); ?>" required>
-                    <p class="error <?php echo !empty($errors['phonenumber']) ? 'visible' : ''; ?>"><?php echo $errors['phonenumber']; ?></p>
+                    <input type="text" name="phonenumber" placeholder="Enter your number"
+                        value="<?php echo htmlspecialchars($_POST['phonenumber'] ?? ''); ?>" required>
+                    <p class="error <?php echo !empty($errors['phonenumber']) ? 'visible' : ''; ?>">
+                        <?php echo $errors['phonenumber']; ?></p>
                 </div>
 
                 <div class="input-box">
                     <i class='bx bxs-location-plus'></i>
-                    <input type="text" name="address" placeholder="Enter your address" value="<?php echo htmlspecialchars($_POST['address'] ?? ''); ?>" required>
-                    <p class="error <?php echo !empty($errors['address']) ? 'visible' : ''; ?>"><?php echo $errors['address']; ?></p>
+                    <input type="text" name="address" placeholder="Enter your address"
+                        value="<?php echo htmlspecialchars($_POST['address'] ?? ''); ?>" required>
+                    <p class="error <?php echo !empty($errors['address']) ? 'visible' : ''; ?>">
+                        <?php echo $errors['address']; ?></p>
                 </div>
 
                 <div class="button">

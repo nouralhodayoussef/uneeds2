@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,9 +15,9 @@
 
 <body>
     <footer>
-        <section>    
+        <section>
             <div id="containerFooter">
-                
+
                 <div id="webFooter">
                     <h3> Products </h3>
                     <p> Planners </p>
@@ -44,10 +45,12 @@
                     <p> CSCI426 </p>
                 </div>
             </div>
-            <div id="credit"> © Nour Alhoda Youssef - Joelle Sarkis </a> &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp <a href="#"> Uneeds </a></div>
+            <div id="credit"> © Nour Alhoda Youssef - Joelle Sarkis </a> &nbsp&nbsp&nbsp | &nbsp&nbsp&nbsp <a href="#">
+                    Uneeds </a></div>
         </section>
 
     </footer>
 
 </body>
+
 </html>

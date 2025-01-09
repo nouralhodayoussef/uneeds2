@@ -1,5 +1,5 @@
 <?php
-include_once 'config.php'; 
+include_once 'config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'] ?? null;
@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $query = "INSERT INTO products (name, description, price, stock, category_id) VALUES (?, ?, ?, ?, ?)";
     $stmt = $con->prepare($query);
-    
+
     if (!$stmt) {
         echo json_encode(['status' => 'error', 'message' => 'Prepare statement failed: ' . $con->error]);
         exit;
@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("ssdii", $name, $description, $price, $stock, $category_id);
 
     if ($stmt->execute()) {
-        $product_id = $stmt->insert_id; 
+        $product_id = $stmt->insert_id;
 
         if (isset($_FILES['images']) && count($_FILES['images']['name']) > 0) {
             $imageCount = count($_FILES['images']['name']);
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 if (move_uploaded_file($image_tmp, $image_url)) {
                     $img_query = "INSERT INTO imgs (product_id, image_url) VALUES (?, ?)";
                     $img_stmt = $con->prepare($img_query);
-                    
+
                     if (!$img_stmt) {
                         error_log("Image insert prepare failed: " . $con->error);
                         continue;

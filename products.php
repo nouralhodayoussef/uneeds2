@@ -15,6 +15,7 @@ while ($product = mysqli_fetch_assoc($result)) {
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +24,7 @@ while ($product = mysqli_fetch_assoc($result)) {
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/products.css">
 </head>
+
 <body>
     <div id="header">Loading...</div>
     <script src="script.js"></script>
@@ -43,7 +45,7 @@ while ($product = mysqli_fetch_assoc($result)) {
                 .catch(error => console.error('Error loading header:', error));
         });
     </script>
-    
+
 
     <div id="mainContainer">
         <h1>All The Products U-need!</h1>
@@ -152,7 +154,8 @@ while ($product = mysqli_fetch_assoc($result)) {
             .then(data => document.getElementById('footer').innerHTML = data)
             .catch(error => console.error('Error loading footer:', error));
     </script>
-    
-    
+
+
 </body>
+
 </html>

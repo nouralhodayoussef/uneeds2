@@ -77,4 +77,3 @@ while ($item = $cart_items_result->fetch_assoc()) {
     $total_price += $item['price'] * $item['quantity'];
 }
 ?>
-
