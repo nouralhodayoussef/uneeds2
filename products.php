@@ -46,104 +46,28 @@ while ($product = mysqli_fetch_assoc($result)) {
         });
     </script>
 
-
     <div id="mainContainer">
         <h1>All The Products U-need!</h1>
 
-        <!-- Laptop Bags Section -->
-        <div class="section1">
-            <h3>Laptop Bags</h3>
-            <div id="containerProduct">
-                <?php foreach ($products_by_category['laptop bags'] ?? [] as $product): ?>
-                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
-                        <div id="box">
-                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
-                            <div id="details">
-                                <h3><?php echo $product['name']; ?></h3>
-                                <h4><?php echo $product['category_name']; ?></h4>
-                                <span>$<?php echo number_format($product['price'], 2); ?></span>
-                            </div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            </div>
+        <?php foreach ($products_by_category as $category_name => $products): ?>
+    <div class="section1">
+        <h3 style="text-align: center; color: black; text-decoration: none;"><?php echo $category_name; ?></h3>
+        <div id="containerProduct">
+            <?php foreach ($products as $product): ?>
+            <a href="product_detail.php?id=<?php echo $product['id']; ?>" style="text-decoration: none;">
+                <div style="height: 120vh;" id="box">
+                    <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
+                    <div id="details">
+                        <h3 class="h3" style="color: black; text-decoration: none;"><?php echo $product['name']; ?></h3>
+                        <h4 class="h4" style="color: black; text-decoration: none;"><?php echo $category_name; ?></h4>
+                        <span>$<?php echo number_format($product['price'], 2); ?></span>
+                    </div>
+                </div>
+            </a>
+            <?php endforeach; ?>
         </div>
-
-        <!-- Mugs Section -->
-        <div class="section1">
-            <h3>Mugs</h3>
-            <div id="containerProduct">
-                <?php foreach ($products_by_category['mugs'] ?? [] as $product): ?>
-                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
-                        <div id="box">
-                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
-                            <div id="details">
-                                <h3><?php echo $product['name']; ?></h3>
-                                <h4><?php echo $product['category_name']; ?></h4>
-                                <span>$<?php echo number_format($product['price'], 2); ?></span>
-                            </div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <!-- Planners Section -->
-        <div class="section1">
-            <h3>Planners</h3>
-            <div id="containerProduct">
-                <?php foreach ($products_by_category['planners'] ?? [] as $product): ?>
-                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
-                        <div id="box">
-                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
-                            <div id="details">
-                                <h3><?php echo $product['name']; ?></h3>
-                                <h4><?php echo $product['category_name']; ?></h4>
-                                <span>$<?php echo number_format($product['price'], 2); ?></span>
-                            </div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <!-- Totebags Section -->
-        <div class="section1">
-            <h3>Totebags</h3>
-            <div id="containerProduct">
-                <?php foreach ($products_by_category['totebags'] ?? [] as $product): ?>
-                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
-                        <div id="box">
-                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
-                            <div id="details">
-                                <h3><?php echo $product['name']; ?></h3>
-                                <h4><?php echo $product['category_name']; ?></h4>
-                                <span>$<?php echo number_format($product['price'], 2); ?></span>
-                            </div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
-
-        <!-- Tumblers Section -->
-        <div class="section1">
-            <h3>Tumblers</h3>
-            <div id="containerProduct">
-                <?php foreach ($products_by_category['tumblers'] ?? [] as $product): ?>
-                    <a href="product_detail.php?id=<?php echo $product['id']; ?>">
-                        <div id="box">
-                            <img src="<?php echo $product['image_url']; ?>" alt="<?php echo $product['name']; ?>">
-                            <div id="details">
-                                <h3><?php echo $product['name']; ?></h3>
-                                <h4><?php echo $product['category_name']; ?></h4>
-                                <span>$<?php echo number_format($product['price'], 2); ?></span>
-                            </div>
-                        </div>
-                    </a>
-                <?php endforeach; ?>
-            </div>
-        </div>
+    </div>
+<?php endforeach; ?>
 
     </div>
 
@@ -154,8 +78,6 @@ while ($product = mysqli_fetch_assoc($result)) {
             .then(data => document.getElementById('footer').innerHTML = data)
             .catch(error => console.error('Error loading footer:', error));
     </script>
-
-
 </body>
 
 </html>
